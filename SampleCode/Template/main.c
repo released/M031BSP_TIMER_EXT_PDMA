@@ -116,7 +116,7 @@ void PDMA_TimerCapture_Start(void)
 /*
 	due to TIMER_SET_CMP_VALUE 2nd parameter limit : 0xFFF FFF
 	=> able to detect lowest freq = 48000000 / 0xFFF FFF = 3
-
+	=> able to detect lowest freq = 48000000(PSC + 1) / 0xFFF FFF = 0.00... , PSC = 0 ~ 0xFF
 */
 
 void PDMA_TimerCapture_Init(void)	//PA10 : TM1_EXT 
