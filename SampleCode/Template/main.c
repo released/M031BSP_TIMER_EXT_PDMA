@@ -193,18 +193,18 @@ void PDMA_IRQHandler(void)
 
     if(status & PDMA_INTSTS_REQTOF1_Msk)	//(1 << (PDMA_INTSTS_REQTOF1_Pos + UART_RX_PDMA_CH) /* Request Time-out */
     {
-		PDMA_SetTimeOut(PDMA,1, 0, 0);
+		PDMA_SetTimeOut(PDMA,PDMAchannel_TIMER_EXT, 0, 0);
 	
         /* Clear PDMA timeout interrupt flag */
-        PDMA_CLR_TMOUT_FLAG(PDMA, 0);
+        PDMA_CLR_TMOUT_FLAG(PDMA, PDMAchannel_TIMER_EXT);
 
-		PDMA_SetTimeOut(PDMA,0, TRUE, PDMATIMEOUT(1));
+		PDMA_SetTimeOut(PDMA,PDMAchannel_TIMER_EXT, TRUE, PDMATIMEOUT(1));
         /* Disable and enable timeout function to restart the timeout counter */
-		PDMA_DisableTimeout(PDMA,(1 << 0) );
-		PDMA_EnableTimeout(PDMA,(1 << 0) );
+		PDMA_DisableTimeout(PDMA,(1 << PDMAchannel_TIMER_EXT) );
+		PDMA_EnableTimeout(PDMA,(1 << PDMAchannel_TIMER_EXT) );
 		
         /* Set transfer count and trigger again */
-        PDMA_SetTransferCnt(PDMA, 0, PDMA_WIDTH_32, dPDMA_TEST_LENGTH);
+        PDMA_SetTransferCnt(PDMA, PDMAchannel_TIMER_EXT, PDMA_WIDTH_32, dPDMA_TEST_LENGTH);
         /* Get the latest status for SPI PDMA again */
         status = PDMA_GET_INT_STATUS(PDMA);
     }
