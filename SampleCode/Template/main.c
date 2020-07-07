@@ -168,7 +168,7 @@ void PDMA_TimerCapture_Process(void)
     for(u32InitCount = 1; u32InitCount < dPDMA_TEST_LENGTH; u32InitCount++)
     {
         u32CAPDiff = g_au32CAPValue[u32InitCount] - g_au32CAPValue[u32InitCount - 1];
-		res = (SystemCoreClock / (TIMER_PSC + 1));
+		res = (TIMER_GetModuleClock(TIMER1) / (TIMER_PSC + 1));
 			
 		if (g_au32CAPValue[u32InitCount] > g_au32CAPValue[u32InitCount - 1])
 		{
